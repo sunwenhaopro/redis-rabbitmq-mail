@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.MailSendLogMapper">
+    <insert id="insert" parameterType="com.example.demo.entity.MailSendLog">
+insert into mail_log (msgId, routekey, exchange, count, status) VALUES (#{msgId},#{routeKey},#{exchange},#{count},#{status});
+    </insert>
+    <select id="getMailSendLogsByStatus" resultType="com.example.demo.entity.MailSendLog">
+        select * from mail_log where status=0
+    </select>
+    <update id="updateCount">
+        update mail_log set count=count+1 where msgId=#{msgId};
+    </update>
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <update id="updateMailSendLogStatus">
+        update mail_log set status = #{status} where msgId=#{msgId};
+    </update>
+</mapper>
